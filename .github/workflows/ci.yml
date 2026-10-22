@@ -10,7 +10,7 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v5
+            - uses: actions/checkout@v7
             - uses: oven-sh/setup-bun@v2
             - run: bun install --frozen-lockfile
             - run: bun run typecheck
@@ -25,15 +25,15 @@ jobs:
             contents: read
             packages: write
         steps:
-            - uses: actions/checkout@v5
-            - uses: docker/setup-buildx-action@v3
-            - uses: docker/login-action@v3
+            - uses: actions/checkout@v7
+            - uses: docker/setup-buildx-action@v4
+            - uses: docker/login-action@v4
               with:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
             - id: meta
-              uses: docker/metadata-action@v5
+              uses: docker/metadata-action@v6
               with:
                   images: ghcr.io/${{ github.repository }}
                   tags: |
@@ -43,7 +43,7 @@ jobs:
                       type=semver,pattern={{major}}
                       type=sha
             # The Dockerfile cross-compiles, so arm64 builds without emulation
-            - uses: docker/build-push-action@v6
+            - uses: docker/build-push-action@v7
               with:
                   context: .
                   platforms: linux/amd64,linux/arm64
