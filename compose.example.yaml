@@ -1,0 +1,18 @@
+# Add the opds-proxy service to the stack that runs your OPDS server (e.g. BookOrbit).
+# Then open http://<docker-host>:8601/admin, add the catalog and create a reader URL.
+services:
+  opds-proxy:
+    image: ghcr.io/paddek/opds-proxy:latest
+    restart: unless-stopped
+    ports:
+      - "8601:8080"
+    volumes:
+      - opds-proxy-data:/data
+    environment:
+      # Code for the first-start setup page; generate one with: openssl rand -hex 8
+      # Without it, a random code is printed in the container log. Ignored once set up.
+      SETUP_CODE: ""
+      # PUBLIC_URL: https://books.example.org  # only behind another reverse proxy
+
+volumes:
+  opds-proxy-data:
