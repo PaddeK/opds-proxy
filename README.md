@@ -1,5 +1,12 @@
 # opds-proxy
 
+> [!IMPORTANT]
+> **opds-proxy has moved into [orbitkit](https://github.com/PaddeK/orbitkit)** as its *OPDS Proxy* feature, and this
+> repository is archived. It still works with any OPDS catalog, not only BookOrbit; turn on just `OPDS_PROXY_ENABLED`
+> if that is all you need. orbitkit's README explains how to move your settings (`OPDS_PROXY_*`) and data.
+> orbitkit also has fixes this version lacks: PocketBook downloading the series feed instead of the book with newer
+> BookOrbit versions, and `http://` links behind a tunnel or reverse proxy that ends TLS.
+
 Makes password-protected OPDS catalogs (BookOrbit, Calibre-Web, Kavita, …) usable from e-readers whose
 built-in OPDS client can't handle authentication, such as PocketBook.
 
